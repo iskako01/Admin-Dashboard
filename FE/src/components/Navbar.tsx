@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   AppBar,
@@ -13,13 +12,19 @@ import {
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import FlexBetween from "./FlexBetween";
-import profileImage from "../assets/profile.png";
 import { setMode } from "../store/global.slice";
 
-const Navbar = () => {
+interface PropsInterface {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (value: boolean) => void;
+}
+
+const Navbar: React.FC<PropsInterface> = ({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -32,7 +37,7 @@ const Navbar = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={() => console.log("o/c sidebar")}>
+          <IconButton onClick={() => setIsSidebarOpen(isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween

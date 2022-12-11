@@ -1,4 +1,3 @@
-import { PaletteMode, ThemeOptions } from "@mui/material";
 import { ColorLightTokenInterface } from "./interfaces/Color/ColorLightTokenInterface";
 import { ColorTokenInterface } from "./interfaces/Color/ColorTokenInterface";
 
@@ -63,38 +62,6 @@ function reverseTokens(tokensDark: ColorTokenInterface): ColorTokenInterface {
 }
 
 export const tokensLight: ColorLightTokenInterface = reverseTokens(tokensDark);
-
-export interface ThemeSettingsInterface {
-  palette: { mode: string };
-  typography: {
-    fontFamily: string;
-    fontSize: number;
-    h1: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h2: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h3: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h4: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h5: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h6: {
-      fontFamily: string;
-      fontSize: number;
-    };
-  };
-}
 
 // mui theme settings
 export const themeSettings = (mode: string): any => {
