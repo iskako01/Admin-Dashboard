@@ -1,4 +1,5 @@
 export interface GreyColorInterface {
+  main?: string;
   0: string;
   10: string;
   50: string;

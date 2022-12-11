@@ -1,4 +1,5 @@
 export interface SecondaryColorInterface {
+  main?: string;
   50: string;
   100: string;
   200: string;

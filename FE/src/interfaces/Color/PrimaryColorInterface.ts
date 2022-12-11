@@ -1,4 +1,6 @@
 export interface PrimaryColorInterface {
+  main?: string;
+  light?: string;
   100: string;
   200: string;
   300: string;
