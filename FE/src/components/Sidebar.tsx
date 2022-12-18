@@ -32,11 +32,12 @@ import {
 import FlexBetween from "../components/FlexBetween";
 import profileImage from "../assets/profile.png";
 import { NavItemInterface } from "../interfaces/NavItemInterface";
-import { ColorTokenInterface } from "../interfaces/Color/ColorTokenInterface";
 import { ThemeSettingsInterface } from "../interfaces/ThemeSettingsInterface";
+import { UserInterface } from "../interfaces/User/UserInterface";
 
 interface PropsInterface {
-  isMobile: boolean;
+  user: UserInterface;
+  isNonMobile: boolean;
   drawerWidth: string;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (value: boolean) => void;
@@ -102,10 +103,11 @@ const navItems: NavItemInterface[] = [
 ];
 
 const Sidebar: FC<PropsInterface> = ({
+  user,
   isSidebarOpen,
   setIsSidebarOpen,
   drawerWidth,
-  isMobile,
+  isNonMobile,
 }) => {
   const [active, setActive] = useState<string>("");
   const { pathname } = useLocation();
@@ -130,7 +132,7 @@ const Sidebar: FC<PropsInterface> = ({
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
               boxSixing: "border-box",
-              borderWidth: isMobile ? "2px" : 0,
+              borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
             },
           }}
@@ -138,12 +140,12 @@ const Sidebar: FC<PropsInterface> = ({
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
-                <Box display="flex" alignItems="center" gap="0.5rem">
+                <Box display="flex" alignItems="center" gap="5px">
                   <Typography variant="h4" fontWeight="bold">
                     ECOMVISION
                   </Typography>
                 </Box>
-                {isMobile && (
+                {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                     <ChevronLeft />
                   </IconButton>
@@ -154,7 +156,7 @@ const Sidebar: FC<PropsInterface> = ({
               {navItems.map(({ text, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography key={text} sx={{ m: "20px 0 10px 30px" }}>
                       {text}
                     </Typography>
                   );
@@ -181,7 +183,7 @@ const Sidebar: FC<PropsInterface> = ({
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "2rem",
+                          ml: "20px",
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
@@ -201,9 +203,9 @@ const Sidebar: FC<PropsInterface> = ({
             </List>
           </Box>
 
-          <Box position="absolute" bottom="2rem">
+          <Box position="absolute" bottom="20px">
             <Divider />
-            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
+            <FlexBetween textTransform="none" gap="10px" m="15px 20px 0 30px">
               <Box
                 component="img"
                 alt="profile"
@@ -216,13 +218,17 @@ const Sidebar: FC<PropsInterface> = ({
               <Box textAlign="left">
                 <Typography
                   fontWeight="bold"
-                  fontSize="0.9rem"
+                  fontSize="9px"
                   sx={{ color: theme.palette.secondary[100] }}
-                ></Typography>
+                >
+                  {user.name}
+                </Typography>
                 <Typography
-                  fontSize="0.8rem"
+                  fontSize="8px"
                   sx={{ color: theme.palette.secondary[200] }}
-                ></Typography>
+                >
+                  {user.occupation}
+                </Typography>
               </Box>
               <SettingsOutlined
                 sx={{

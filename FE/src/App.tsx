@@ -1,14 +1,13 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { themeSettings } from "./theme";
-import { RootState } from "./store";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
 import DefaultLayout from "./layout";
+import { useAppSelector } from "./helpers/useAppSelector";
 
 function App() {
-  const mode: string = useSelector((state: RootState) => state.global.mode);
+  const mode = useAppSelector((state) => state.global.mode);
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
