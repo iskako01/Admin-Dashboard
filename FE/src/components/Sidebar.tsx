@@ -118,7 +118,7 @@ const Sidebar: FC<PropsInterface> = ({
 
   return (
     <Box component="nav">
-      {isSidebarOpen ?? (
+      {isSidebarOpen && (
         <Drawer
           open={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
@@ -126,19 +126,19 @@ const Sidebar: FC<PropsInterface> = ({
           anchor="left"
           sx={{
             width: drawerWidth,
-            "6 .MuiDrawer-paper": {
+            "& .MuiDrawer-paper": {
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
-              boxSizing: "border-box",
+              boxSixing: "border-box",
               borderWidth: isMobile ? "2px" : 0,
               width: drawerWidth,
             },
           }}
         >
           <Box width="100%">
-            <Box m="15px 20px 20px 30px">
+            <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.secondary.main}>
-                <Box display="flex" alignItems="center" gap="5px">
+                <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
                     ECOMVISION
                   </Typography>
@@ -154,7 +154,7 @@ const Sidebar: FC<PropsInterface> = ({
               {navItems.map(({ text, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "25px 0 10px 30px" }}>
+                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
                       {text}
                     </Typography>
                   );
@@ -181,7 +181,7 @@ const Sidebar: FC<PropsInterface> = ({
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "20px",
+                          ml: "2rem",
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
@@ -199,6 +199,38 @@ const Sidebar: FC<PropsInterface> = ({
                 );
               })}
             </List>
+          </Box>
+
+          <Box position="absolute" bottom="2rem">
+            <Divider />
+            <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
+              <Box
+                component="img"
+                alt="profile"
+                src={profileImage}
+                height="40px"
+                width="40px"
+                borderRadius="50%"
+                sx={{ objectFit: "cover" }}
+              />
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
+                  sx={{ color: theme.palette.secondary[100] }}
+                ></Typography>
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{ color: theme.palette.secondary[200] }}
+                ></Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{
+                  color: theme.palette.secondary[300],
+                  fontSize: "25px ",
+                }}
+              />
+            </FlexBetween>
           </Box>
         </Drawer>
       )}
