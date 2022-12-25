@@ -11,7 +11,7 @@ export const getProducts = async (req, res) => {
           productId: product._id,
         });
 
-        return { ...product._doc, stat };
+        return { ...product._doc, stat: stat[0] };
       })
     );
 
