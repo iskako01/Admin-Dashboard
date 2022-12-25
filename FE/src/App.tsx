@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
 import DefaultLayout from "./layout";
 import { useAppSelector } from "./helpers/useAppSelector";
+import Products from "./scenes/products";
 
 function App() {
   const mode = useAppSelector((state) => state.global.mode);
@@ -19,6 +20,7 @@ function App() {
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/products" element={<Products />} />
           </Route>
         </Routes>
       </ThemeProvider>

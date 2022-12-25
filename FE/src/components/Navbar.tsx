@@ -1,5 +1,4 @@
 import { useState, SyntheticEvent } from "react";
-import { useDispatch } from "react-redux";
 import {
   AppBar,
   Box,
@@ -24,7 +23,9 @@ import FlexBetween from "./FlexBetween";
 import { setMode } from "../store/global.slice";
 import { UserInterface } from "../interfaces/User/UserInterface";
 import profileImage from "../assets/profile.png";
-import { ThemeSettingsInterface } from "../interfaces/ThemeSettingsInterface";
+
+import { useAppDispatch } from "../helpers/useAppDispatch";
+import { useAppTheme } from "../helpers/useAppTheme";
 
 interface PropsInterface {
   user: UserInterface;
@@ -37,8 +38,8 @@ const Navbar: React.FC<PropsInterface> = ({
   isSidebarOpen,
   setIsSidebarOpen,
 }) => {
-  const dispatch = useDispatch();
-  const theme = useTheme<ThemeSettingsInterface>();
+  const dispatch = useAppDispatch();
+  const theme = useAppTheme();
   const [anchorElement, setAnchorElement] = useState(null);
   const isOpen = Boolean(anchorElement);
 

@@ -12,8 +12,6 @@ const DefaultLayout = () => {
   const userId: string = useAppSelector((state) => state.global.userId);
   const { data } = useGetUserQuery(userId);
 
-  console.log(userId, data);
-
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
       <Sidebar

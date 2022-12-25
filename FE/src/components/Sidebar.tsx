@@ -11,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
 } from "@mui/material";
 import {
   SettingsOutlined,
@@ -34,6 +33,7 @@ import profileImage from "../assets/profile.png";
 import { NavItemInterface } from "../interfaces/NavItemInterface";
 import { ThemeSettingsInterface } from "../interfaces/ThemeSettingsInterface";
 import { UserInterface } from "../interfaces/User/UserInterface";
+import { useAppTheme } from "../helpers/useAppTheme";
 
 interface PropsInterface {
   user: UserInterface;
@@ -112,7 +112,7 @@ const Sidebar: FC<PropsInterface> = ({
   const [active, setActive] = useState<string>("");
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const theme = useTheme<ThemeSettingsInterface>();
+  const theme = useAppTheme();
 
   useEffect(() => {
     setActive(pathname.substring(1));
