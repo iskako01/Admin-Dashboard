@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import React from "react";
 import Header from "../../components/Header";
 import { useGetGeographyQuery } from "../../store/api";
 import { useAppSelector } from "../../helpers/useAppSelector";
@@ -10,7 +9,7 @@ import { useAppTheme } from "../../helpers/useAppTheme";
 const Geography = () => {
   const userId = useAppSelector((state) => state.global.userId);
   const theme = useAppTheme();
-  const { data, isLoading } = useGetGeographyQuery(userId);
+  const { data } = useGetGeographyQuery(userId);
   console.log(data);
 
   return (

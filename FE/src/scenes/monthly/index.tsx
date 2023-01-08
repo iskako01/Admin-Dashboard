@@ -102,7 +102,6 @@ export const Monthly = () => {
               reverse: false,
             }}
             yFormat=" >-.2f"
-            curve="catmullRom"
             axisTop={null}
             axisRight={null}
             axisBottom={{
