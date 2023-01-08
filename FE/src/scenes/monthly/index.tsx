@@ -1,28 +1,22 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Box } from "@mui/material";
 import Header from "../../components/Header";
 import { useAppTheme } from "../../helpers/useAppTheme";
 import { useGetSalesQuery } from "../../store/api";
-import DatePicker from "react-datepicker";
 import { useAppSelector } from "../../helpers/useAppSelector";
 import { OverviewInterface } from "../../interfaces/OverviewChart/OverviewInterface";
 import { ResponsiveLine } from "@nivo/line";
-import "react-datepicker/dist/react-datepicker.css";
-import { DailyFormattedDateInterface } from "../../interfaces/Daily/DailyFormattedDate";
+import { MonthlyFormattedDateInterface } from "../../interfaces/Monthly/MonthlyFormattedDate";
 
-export const Daily = () => {
+export const Monthly = () => {
   const theme = useAppTheme();
   const userId = useAppSelector((state) => state.global.userId);
   const { data } = useGetSalesQuery(userId);
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2021-02-01")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2021-03-01"));
 
   const [formattedData] = useMemo<Array<OverviewInterface[]>>(() => {
     if (!data) return [];
 
-    const { dailyData } = data;
+    const { monthlyData } = data;
 
     const totalSalesLine: OverviewInterface = {
       id: "totalSales",
@@ -35,63 +29,32 @@ export const Daily = () => {
       data: [],
     };
 
-    if (startDate && endDate) {
-      Object.values(dailyData).forEach((value) => {
-        const dateFormatted = new Date(
-          (value as DailyFormattedDateInterface).date
-        );
-
-        if (dateFormatted >= startDate && dateFormatted <= endDate) {
-          const splitDate = (
-            value as DailyFormattedDateInterface
-          ).date.substring(
-            (value as DailyFormattedDateInterface).date.indexOf("-") + 1
-          );
-
-          totalSalesLine.data = [
-            ...totalSalesLine.data,
-            {
-              x: splitDate,
-              y: (value as DailyFormattedDateInterface).totalSales,
-            },
-          ];
-          totalUnitsLine.data = [
-            ...totalUnitsLine.data,
-            {
-              x: splitDate,
-              y: (value as DailyFormattedDateInterface).totalUnits,
-            },
-          ];
-        }
-      });
-    }
+    Object.values(monthlyData).forEach((value) => {
+      totalSalesLine.data = [
+        ...totalSalesLine.data,
+        {
+          x: (value as MonthlyFormattedDateInterface).month,
+          y: (value as MonthlyFormattedDateInterface).totalSales,
+        },
+      ];
+      totalUnitsLine.data = [
+        ...totalUnitsLine.data,
+        {
+          x: (value as MonthlyFormattedDateInterface).month,
+          y: (value as MonthlyFormattedDateInterface).totalUnits,
+        },
+      ];
+    });
 
     const formattedData = [totalSalesLine, totalUnitsLine];
 
     return [formattedData];
-  }, [data, startDate, endDate]);
+  }, [data]);
 
   return (
     <Box m="15px 25px">
-      <Header title="Daily sales" subtitle="Chart of daily sales" />
+      <Header title="Monthly sales" subtitle="Chart of monthly sales" />
       <Box mt="40px" height="75vh">
-        <Box display="flex" justifyContent="flex-end">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-          />
-        </Box>
         {data ? (
           <ResponsiveLine
             data={formattedData}
@@ -201,4 +164,4 @@ export const Daily = () => {
   );
 };
 
-export default Daily;
+export default Monthly;
