@@ -1,4 +1,4 @@
-import { FC, useState, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useGetSalesQuery } from "../store/api";
 import { useAppSelector } from "../helpers/useAppSelector";
