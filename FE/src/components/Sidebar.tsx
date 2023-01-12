@@ -93,7 +93,7 @@ const navItems: NavItemInterface[] = [
     icon: null,
   },
   {
-    text: "Admin",
+    text: "Admins",
     icon: <AdminPanelSettingsOutlined />,
   },
   {
