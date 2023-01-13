@@ -2,14 +2,14 @@ import { useAppSelector } from "../../helpers/useAppSelector";
 import { useGetAdminsQuery } from "../../store/api";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import Header from "../../components/Header";
 import { useAppTheme } from "../../helpers/useAppTheme";
+import Header from "../../components/Header";
+import DataGridCustomColumnMenu from "../../components/DataGridCustomColumnMenu";
 
 const Admins = () => {
   const theme = useAppTheme();
   const userId = useAppSelector((state) => state.global.userId);
   const { data, isLoading } = useGetAdminsQuery(userId);
-  console.log(data);
 
   const columns = [
     {
@@ -89,6 +89,7 @@ const Admins = () => {
             getRowId={(row) => row._id}
             rows={data || []}
             columns={columns}
+            components={{ ColumnMenu: DataGridCustomColumnMenu }}
           />
         </Box>
       ) : (
