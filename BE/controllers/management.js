@@ -36,14 +36,14 @@ export const getUserPerformance = async (req, res) => {
         return Transaction.findById(id);
       })
     );
-
-    const filteredSalesTransactions = saleTransactions.filter(
+	
+    const filteredSaleTransactions = saleTransactions.filter(
       (transaction) => transaction !== null
     );
 
     res
       .status(200)
-      .json({ user: userWithStats, sales: filteredSalesTransactions });
+      .json({ user: userWithStats[0], sales: filteredSaleTransactions });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
