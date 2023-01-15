@@ -39,6 +39,7 @@ function App() {
             <Route path="/breakdown" element={<Breakdown />} />
             <Route path="/admins" element={<Admins />} />
             <Route path="/performance" element={<Performance />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
       </ThemeProvider>

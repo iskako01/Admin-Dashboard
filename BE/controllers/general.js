@@ -1,6 +1,6 @@
 import User from "../models/User.js";
-import OverallState from "../models/OverallState.js";
-import Transactions from "../models/Transactions.js";
+import OverallStat from "../models/OverallStat.js";
+import Transaction from "../models/Transaction.js";
 
 export const getUser = async (req, res) => {
   try {
@@ -15,23 +15,22 @@ export const getUser = async (req, res) => {
 
 export const getDashboardStats = async (req, res) => {
   try {
-    // Hardcoded values
+    // hardcoded values
     const currentMonth = "November";
     const currentYear = 2021;
     const currentDay = "2021-11-15";
 
-    // Transactions
-
-    const transactions = await Transactions.find()
+    /* Recent Transactions */
+    const transactions = await Transaction.find()
       .limit(50)
       .sort({ createdOn: -1 });
 
-    // Overall Stats
-    const overallStat = await OverallState.find({ year: currentYear });
+    /* Overall Stats */
+    const overallStat = await OverallStat.find({ year: currentYear });
 
     const {
       totalCustomers,
-      yesrlyTotalSoldUnits,
+      yearlyTotalSoldUnits,
       yearlySalesTotal,
       monthlyData,
       salesByCategory,
@@ -47,7 +46,7 @@ export const getDashboardStats = async (req, res) => {
 
     res.status(200).json({
       totalCustomers,
-      yesrlyTotalSoldUnits,
+      yearlyTotalSoldUnits,
       yearlySalesTotal,
       monthlyData,
       salesByCategory,

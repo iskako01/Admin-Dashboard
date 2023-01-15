@@ -17,7 +17,6 @@ const Transactions = () => {
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  console.log(data);
 
   const columns = [
     {
